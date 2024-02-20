@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="employeeApp">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Management System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body ng-controller="MainController">
+
+  <div>
+    <h1>Employee Management System</h1>
+    <div>
+      <button ng-click="showAddForm()">Add Employee</button>
+    </div>
+
+    <div ng-show="isAddFormVisible || isEditFormVisible">
+      <h2>{{ isEditFormVisible ? 'Edit Employee' : 'Add Employee' }}</h2>
+      <form ng-submit="submitForm()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" ng-model="newEmployee.name" required>
+
+        <label for="position">Position:</label>
+        <input type="text" id="position" ng-model="newEmployee.position" required>
+
+        <label for="contact">Contact:</label>
+        <input type="text" id="contact" ng-model="newEmployee.contact" required>
+
+        <button type="submit">{{ isEditFormVisible ? 'Save Changes' : 'Add Employee' }}</button>
+        <button type="button" ng-click="cancelForm()">Cancel</button>
+      </form>
+    </div>
+
+    <div>
+      <h2>Employee List</h2>
+      <ul>
+        <li ng-repeat="employee in employees">
+          {{employee.name}} - {{employee.position}} - {{employee.contact}}
+          <button ng-click="showEditForm($index)">Edit</button>
+          <button ng-click="deleteEmployee($index)">Delete</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
